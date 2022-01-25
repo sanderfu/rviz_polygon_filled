@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   rviz
   geometry_msgs
   roslint
+  jsk_recognition_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -149,7 +150,8 @@ include_directories(
 ## Here we specify the list of source files.
 ## The generated MOC files are included automatically as headers.
 set(SRC_FILES
-    src/poly_fill.cpp
+    #src/poly_fill.cpp
+    src/poly_arr_fill.cpp
 )
 
 ## An rviz plugin is just a shared library, so here we declare the

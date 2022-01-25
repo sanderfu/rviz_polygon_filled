@@ -50,7 +50,7 @@ class FloatProperty;
 namespace rviz_polygon_filled
 {
 
-class PolygonFilledDisplay: public rviz::MessageFilterDisplay<geometry_msgs::PolygonStamped>
+class PolygonFilledDisplay: public rviz::MessageFilterDisplay<jsk_recognition_msgs::PolygonArray>
 {
 Q_OBJECT
 public:
@@ -60,10 +60,10 @@ public:
   virtual void reset() override;
 
 protected:
-  virtual void processMessage( const geometry_msgs::PolygonStamped::ConstPtr& msg ) override;
+  virtual void processMessage( const jsk_recognition_msgs::PolygonArray::ConstPtr& msg ) override;
   void drawPolygonBorder(const geometry_msgs::PolygonStamped::ConstPtr& msg);
 
-  Ogre::ManualObject* manual_object_;
+  std::vector<Ogre::ManualObject*> manual_objects_;
 
   rviz::BoolProperty* draw_fill_;
   rviz::BoolProperty* draw_back_;

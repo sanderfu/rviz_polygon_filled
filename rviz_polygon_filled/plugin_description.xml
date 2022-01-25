@@ -3,8 +3,8 @@
          type="rviz_polygon_filled::PolygonFilledDisplay"
          base_class_type="rviz::Display">
     <description>
-      Triangulate polygon and display it as filled triangle strip.
+      Triangulate polygons and display them as filled triangle strip.
     </description>
-    <message_type>geometry_msgs/PolygonStamped</message_type>
+    <message_type>jsk_recognition_msgs/PolygonArray</message_type>
   </class>
 </library>
