@@ -19,7 +19,7 @@ namespace rviz_polygon_filled
 
 PolygonFilledDisplay::PolygonFilledDisplay()
 {
-  draw_fill_ = new rviz::BoolProperty("Fill",false, "Fill with color", this, SLOT( queueRender() ));
+  draw_fill_ = new rviz::BoolProperty("Fill",true, "Fill with color", this, SLOT( queueRender() ));
   draw_back_ = new rviz::BoolProperty("Backface",false, "Draw backface of polygon", this, SLOT( queueRender() ));
   color_fill_ = new rviz::ColorProperty( "Fill color", QColor( 25, 255, 0 ),
                                        "Color to fill the polygon.", this, SLOT( queueRender() ));
