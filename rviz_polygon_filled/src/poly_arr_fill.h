@@ -31,7 +31,7 @@
 #define POLYGON_FILLED_DISPLAY_H
 
 #include <geometry_msgs/PolygonStamped.h>
-#include <jsk_recognition_msgs/PolygonArray.h>
+#include <usv_simulator/PolygonArray64.h>
 #include "rviz/message_filter_display.h"
 
 // Forward declaration to reduce compile time
@@ -50,7 +50,7 @@ class FloatProperty;
 namespace rviz_polygon_filled
 {
 
-class PolygonFilledDisplay: public rviz::MessageFilterDisplay<jsk_recognition_msgs::PolygonArray>
+class PolygonFilledDisplay: public rviz::MessageFilterDisplay<usv_simulator::PolygonArray64>
 {
 Q_OBJECT
 public:
@@ -60,7 +60,7 @@ public:
   virtual void reset() override;
 
 protected:
-  virtual void processMessage( const jsk_recognition_msgs::PolygonArray::ConstPtr& msg ) override;
+  virtual void processMessage( const usv_simulator::PolygonArray64::ConstPtr& msg ) override;
   void drawPolygonBorder(const geometry_msgs::PolygonStamped::ConstPtr& msg);
 
   std::vector<Ogre::ManualObject*> manual_objects_;

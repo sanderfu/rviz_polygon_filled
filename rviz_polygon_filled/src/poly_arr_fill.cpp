@@ -58,25 +58,27 @@ void PolygonFilledDisplay::reset()
   manual_objects_.clear();
 }
 
-bool validateFloats( const jsk_recognition_msgs::PolygonArray& msg )
+bool validateFloats( const usv_simulator::PolygonArray64& msg )
 {
   for (auto poly_it=msg.polygons.begin(); poly_it!=msg.polygons.end(); poly_it++){
-    if(!rviz::validateFloats(poly_it->polygon.points)) return false;
+    if(!rviz::validateFloats(poly_it->points)) return false;
   }
   return true;
 }
 
-void PolygonFilledDisplay::processMessage(const jsk_recognition_msgs::PolygonArray::ConstPtr& msg)
+void PolygonFilledDisplay::processMessage(const usv_simulator::PolygonArray64::ConstPtr& msg)
 {
+  ROS_INFO_STREAM("From RVIZ plugin!");
   if( !validateFloats( *msg ))
   {
     setStatus( rviz::StatusProperty::Error, "Topic", "Message contained invalid floating point values (nans or infs)" );
     return;
   }
 
+  //reset();
   for(auto poly_it=msg->polygons.begin(); poly_it!=msg->polygons.end(); poly_it++){
     std::vector<p2t::Point*> polyline;
-    for (const auto &point : poly_it->polygon.points)
+    for (const auto &point : poly_it->points)
     {
       polyline.push_back(new p2t::Point(point.x, point.y));
     }
@@ -145,13 +147,13 @@ void PolygonFilledDisplay::processMessage(const jsk_recognition_msgs::PolygonArr
       {
           manual_object->begin( "BaseWhiteNoLighting", Ogre::RenderOperation::OT_LINE_STRIP );
 
-          for (const auto &point : poly_it->polygon.points)
+          for (const auto &point : poly_it->points)
           {
             manual_object->position( point.x, point.y, 0.0 );
             manual_object->colour( colorBorder );
           }
 
-          manual_object->position( poly_it->polygon.points.front().x, poly_it->polygon.points.front().y, 0.0 );
+          manual_object->position( poly_it->points.front().x, poly_it->points.front().y, 0.0 );
           manual_object->colour( colorBorder );
           manual_object->end();
       }
